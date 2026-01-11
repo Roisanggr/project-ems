@@ -1,0 +1,42 @@
+{
+  "name": "iot-dashboard-backend",
+  "version": "1.0.0",
+  "description": "IoT Dashboard Backend with TypeScript and MySQL",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["iot", "dashboard", "typescript", "mysql", "express"],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-file-routing": "^3.0.2",
+    "express-fileupload": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.16.0",
+    "bcrypt": "^6.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "module-alias": "^2.2.3",
+    "body-parser": "^1.20.2",
+    "@types/bcrypt": "^6.0.0",
+    "@types/jsonwebtoken": "^9.0.10"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/morgan": "^1.9.7",
+    "@types/express-fileupload": "^1.4.4",
+    "@types/node": "^20.8.7",
+    "typescript": "^5.2.2",
+    "ts-node-dev": "^2.0.0"
+  },
+  "_moduleAliases": {
+    "@": "."
+  }
+}

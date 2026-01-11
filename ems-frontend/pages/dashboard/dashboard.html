@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Environment Monitoring System</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="author" content="Rois Afif Anggoro">
+    <meta name="keywords" content="Admin Dashboard">
+    <meta name="description" content="Dashlite is a Bootstrap 5 HTML/CSS Admin Dashboard">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js">
+    </script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Sidebar Menu -->
+    <div id="sidebar" class="d-flex flex-column flex-shrink-0 text-white">
+        <div class="p-3 d-flex align-items-center justify-content-between">
+            <!-- logo -->
+            <img src="/images/main-logo.png" class="img-fluid">
+            <!-- logo -->
+            <button class="btn btn-sm d-block d-lg-none" id="sidebarclose">
+                <iconify-icon icon="mdi:hamburger-menu-back" class="text-white" width="24" height="24"></iconify-icon>
+            </button>
+        </div>
+
+        <hr class="mt-0 mb-2">
+
+        <ul class="nav flex-column mb-auto px-2">
+            <li class="nav-item">
+                <a href="/pages/dashboard/dashboard.html" class="nav-link sidebar-link py-3 active">
+                    <iconify-icon icon="material-symbols:speed-outline" width="24" height="24"></iconify-icon>
+                    Dashboard <span class="badge bg-secondary">Daily</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/pages/report_page/report.html" class="nav-link sidebar-link py-3">
+                    <iconify-icon icon="mdi-exclamation-thick" width="24" height="24"></iconify-icon>
+                    Reports
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/pages/activities/activities.html" class="nav-link sidebar-link py-3">
+                    <iconify-icon icon="basil:layout-outline" width="24" height="24"></iconify-icon>
+                    Activities
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/pages/support_page/support.html" class="nav-link sidebar-link py-3">
+                    <iconify-icon icon="ix:support" width="24" height="24"></iconify-icon>
+                    Support
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
+    <!-- Topbar -->
+    <nav id="topbar" class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
+            <div class="container-fluid p-lg-4">
+                <button class="btn btn-sm p-0" id="sidebarToggle">
+                    <iconify-icon icon="mdi:hamburger-menu-back" width="24" height="24"></iconify-icon>
+                </button>
+
+                <div class="d-flex align-items-center">
+                    <!-- Search -->
+                    <div class="me-3 position-relative">
+                        <iconify-icon icon="material-symbols:search" width="20" height="20"
+                            class="position-absolute top-50 start-0 translate-middle-y ms-2"></iconify-icon>
+                        <input type="text" class="form-control ps-4 shadow-none" placeholder="Search..."
+                            style="width: 120px;">
+                    </div>
+                    
+                    <!-- Notifications Dropdown -->
+                    <div class="dropdown me-3">
+                        <a class="position-relative" href="#" role="button" id="notificationsDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <iconify-icon icon="mdi:bell-outline" width="24" height="24"></iconify-icon>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                                8+
+                                <span class="visually-hidden">unread notifications</span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="notificationsDropdown"
+                            style="width: 320px;">
+                            <li
+                                class="dropdown-header bg-light py-2 px-3 d-flex justify-content-between align-items-center">
+                                <span>Notifications</span>
+                                <a href="#" class="small">Clear all</a>
+                            </li>
+                            <li class="px-2 py-1">
+                                <a href="#" class="dropdown-item d-flex align-items-start py-2">
+                                    <div class="me-2 text-success">
+                                        <iconify-icon icon="mdi:check-circle-outline" width="24"
+                                            height="24"></iconify-icon>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">Your order #12345 has been shipped</p>
+                                        <small class="text-muted">Just now</small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="px-2 py-1">
+                                <a href="#" class="dropdown-item d-flex align-items-start py-2">
+                                    <div class="me-2 text-warning">
+                                        <iconify-icon icon="mdi:alert-circle-outline" width="24"
+                                            height="24"></iconify-icon>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">System maintenance scheduled for tonight</p>
+                                        <small class="text-muted">30 minutes ago</small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="px-2 py-1">
+                                <a href="#" class="dropdown-item d-flex align-items-start py-2">
+                                    <div class="me-2 text-info">
+                                        <iconify-icon icon="mdi:account-plus" width="24" height="24"></iconify-icon>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">3 new team members joined</p>
+                                        <small class="text-muted">2 hours ago</small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-footer text-center py-2">
+                                <a href="#" class="text-primary">View all notifications</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- User Profile Dropdown -->
+                    <div class="dropdown">
+                        <a class="dropdown-toggle d-flex align-items-center text-decoration-none" href="#" role="button"
+                            id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="images/team1.jpg" class="rounded-circle me-2" width="32" height="32">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <iconify-icon icon="mdi:account-outline" class="me-2" width="20"
+                                        height="20"></iconify-icon>
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <iconify-icon icon="mdi:cog-outline" class="me-2" width="20"
+                                        height="20"></iconify-icon>
+                                    Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <iconify-icon icon="mdi:email-outline" class="me-2" width="20"
+                                        height="20"></iconify-icon>
+                                    Messages
+                                    <span class="ms-auto badge bg-primary rounded-pill">14</span>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <iconify-icon icon="mdi:logout-variant" class="me-2" width="20"
+                                        height="20"></iconify-icon>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    <!-- Main Content Area -->
+    <div class="container-fluid px-lg-4 content-with-sticky-top">
+
+            <div class="py-4">
+                <h5 class="mb-0">Hello Rois, Welcome!</h5>
+                <p class="mb-0 text-muted d-none d-md-block">Show your day very happy with us.</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card stat-card d-flex">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="text-muted mb-2">Current Time</p>
+                                <!-- id sudah diganti menjadi time-value -->
+                                <h6 class="display-6 fw-normal" id="time-value">-</h6>
+                                <h6 class="change text-black fs-4" id="ph-status">WIB</h6>
+                                <a href="/details-data/ph-details/ph.html" class="">
+
+                                    <span>
+                                        <iconify-icon icon="" width="24" height="24"
+                                            style="vertical-align: top;"></iconify-icon>
+                                    </span>
+                                </a>
+                            </div>
+
+                            <!-- Jam analog mini (di kanan) -->
+                            <div class="p-4 " style="background-color: #EEF3E9;">
+                                <div class="mini-clock" aria-hidden="true">
+                                    <div class="hand hour" id="hour"></div>
+                                    <div class="hand minute" id="minute"></div>
+                                    <div class="hand second" id="second"></div>
+                                    <div class="dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card stat-card d-flex">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="text-muted mb-2">Temperature</p>
+                                <h3 class="display-6 fw-normal" id="moisture-value">-</h3>
+                                <h6 class="change fs-4" id="moisture-status">-</h6>
+                                <a href="/details-data/moisture-details/moisture.html" class="">View Details
+                                    <span><iconify-icon icon="mdi-light:arrow-right" width="24" height="24"
+                                            style="vertical-align: top;"></iconify-icon></span>
+                                </a>
+                            </div>
+                            <div class="p-4" style="background-color: #EEF3E9;">
+                                <iconify-icon icon="ri-temp-hot-line" class="text-success" width="35"
+                                    height="35"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card stat-card d-flex">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="text-muted mb-2">Humidity</p>
+                                <h3 class="display-6 fw-normal" id="air-moisture-value">-</h3>
+                                <h6 class="change fs-4" id="air-moisture-status">-</h6>
+                                <a href="/details-data/moisture-details/moisture.html" class="">View Details
+                                    <span><iconify-icon icon="mdi-light:arrow-right" width="24" height="24"
+                                            style="vertical-align: top;"></iconify-icon></span>
+                                </a>
+                            </div>
+                            <div class="p-4" style="background-color: #EEF3E9;">
+                                <iconify-icon icon="mdi-water-alert-outline" class="text-warning" width="35"
+                                    height="35"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card stat-card d-flex">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="text-muted mb-2">Speed</p>
+                                <h3 class="display-6 fw-normal" id="water-pump-value">-</h3>
+                                <h6 class="change text-black-50 fs-4">Min/day</h6>
+                                <a href="/details-data/water-pump-details/water.html" class="">View Details
+                                    <span><iconify-icon icon="mdi-light:arrow-right" width="24" height="24"
+                                            style="vertical-align: top;"></iconify-icon></span></a>
+                            </div>
+                            <div class="p-4" style="background-color: #EEF3E9;">
+                                <iconify-icon icon="mdi-web-clock" class="text-info" width="35"
+                                    height="35"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Section -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Average Data Summary</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="revenueDropdown"
+                            data-bs-toggle="dropdown">
+                            Today
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Today</a></li>
+                            <li><a class="dropdown-item" href="#">This Week</a></li>
+                            <li><a class="dropdown-item" href="#">This Month</a></li>
+                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div
+                                class="border rounded-2 d-flex justify-content-between align-items-center d-lg-block p-3 mb-2 mb-lg-0">
+                                <p class="text-secondary text-uppercase m-0">Temperature Level</p>
+                                <h3 class="display-6 fw-normal m-0">8.8</h3> <span class="text-success">Lembab</span>
+                                <!-- nanti pada span lembab itu isinya tergantung dari level yg di dapat, bisa
+                                 lembab, kering, atau basah -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div
+                                class="border rounded-2 d-flex justify-content-between align-items-center d-lg-block p-3 mb-2 mb-lg-0">
+                                <p class="text-secondary text-uppercase m-0">Humidity Level</p>
+                                <h3 class="display-6 fw-normal m-0">12</h3> <span class="text-success">Lembab</span>
+                                <!-- nanti pada span lembab itu isinya tergantung dari level yg di dapat, bisa
+                                 lembab, kering, atau basah -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div
+                                class="border rounded-2 d-flex justify-content-between align-items-center d-lg-block p-3 mb-2 mb-lg-0">
+                                <p class="text-secondary text-uppercase m-0">Server Speed Level</p>
+                                <h3 class="display-6 fw-normal m-0">21</h3> <span class="text-primary">Min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Three separate line charts -->
+                <div class="chart-container p-3">
+                    <div class="row">
+                        <div class="col-lg-4 mb-3 mb-lg-0">
+                            <div class="chart-box">
+                                <h6 class="text-center mb-3">Temperature Level</h6>
+                                <canvas id="tempChart"></canvas>
+                                <div class="d-flex justify-content-between mt-2 small text-muted">
+                                    <span>Lowest: <strong id="temp-low">-</strong></span>
+                                    <span>Highest: <strong id="temp-high">-</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-3 mb-lg-0">
+                            <div class="chart-box">
+                                <h6 class="text-center mb-3">Humidity Level</h6>
+                                <canvas id="humidityChart"></canvas>
+                                <div class="d-flex justify-content-between mt-2 small text-muted">
+                                    <span>Lowest: <strong id="humidity-low">-</strong></span>
+                                    <span>Highest: <strong id="humidity-high">-</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-3 mb-lg-0">
+                            <div class="chart-box">
+                                <h6 class="text-center mb-3">Server Speed Level</h6>
+                                <canvas id="serverChart"></canvas>
+                                <div class="d-flex justify-content-between mt-2 small text-muted">
+                                    <span>Lowest: <strong id="server-low">-</strong></span>
+                                    <span>Highest: <strong id="server-high">-</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARIMA Prediction Section -->
+            <div class="card mt-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-1">ARIMA Prediction Model</h5>
+                        <small class="text-muted">
+                            <iconify-icon icon="mdi:brain" width="16" height="16" class="me-1"></iconify-icon>
+                            Machine Learning - AutoRegressive Integrated Moving Average
+                        </small>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="badge bg-success me-2" id="ml-status">
+                            <iconify-icon icon="mdi:check-circle" width="14" height="14"></iconify-icon>
+                            Model Active
+                        </span>
+                        <small class="text-muted">Last Update: <span id="prediction-time">-</span></small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Prediction Info Banner -->
+                    <div class="alert alert-info border-0 mb-3" role="alert">
+                        <div class="d-flex align-items-start">
+                            <iconify-icon icon="mdi:information" width="24" height="24" class="me-2 mt-1"></iconify-icon>
+                            <div>
+                                <strong>Prediksi 2 Jam Kedepan</strong>
+                                <p class="mb-0 small">Model ARIMA menganalisis pola historis 24 jam terakhir untuk memprediksi kondisi 2 jam kedepan dengan confidence interval 95%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prediction Cards -->
+                    <div class="row">
+                        <!-- Temperature Prediction -->
+                        <div class="col-lg-4 mb-3 mb-lg-0">
+                            <div class="prediction-card">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h6 class="mb-1">Room Temperature</h6>
+                                        <small class="text-muted">Forecast +2 Hours</small>
+                                    </div>
+                                    <iconify-icon icon="ri-temp-hot-line" class="text-success" width="28" height="28"></iconify-icon>
+                                </div>
+                                <div class="prediction-value mb-2">
+                                    <h2 class="mb-0" id="temp-prediction">-</h2>
+                                    <small class="text-muted">°C</small>
+                                </div>
+                                <div class="prediction-range mb-3">
+                                    <small class="text-muted">Confidence Range: <strong id="temp-range">-</strong></small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Current: <strong id="temp-current">23.5°C</strong></small>
+                                    <span class="trend-badge" id="temp-trend">
+                                        <iconify-icon icon="mdi:arrow-up" width="16" height="16"></iconify-icon>
+                                        +1.2°C
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Humidity Prediction -->
+                        <div class="col-lg-4 mb-3 mb-lg-0">
+                            <div class="prediction-card">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h6 class="mb-1">Room Humidity</h6>
+                                        <small class="text-muted">Forecast +2 Hours</small>
+                                    </div>
+                                    <iconify-icon icon="mdi-water-alert-outline" class="text-warning" width="28" height="28"></iconify-icon>
+                                </div>
+                                <div class="prediction-value mb-2">
+                                    <h2 class="mb-0" id="humidity-prediction">-</h2>
+                                    <small class="text-muted">%</small>
+                                </div>
+                                <div class="prediction-range mb-3">
+                                    <small class="text-muted">Confidence Range: <strong id="humidity-range">-</strong></small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Current: <strong id="humidity-current">68%</strong></small>
+                                    <span class="trend-badge" id="humidity-trend">
+                                        <iconify-icon icon="mdi:arrow-down" width="16" height="16"></iconify-icon>
+                                        -3%
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Server Speed Prediction -->
+                        <div class="col-lg-4 mb-3 mb-lg-0">
+                            <div class="prediction-card">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h6 class="mb-1">Server Speed</h6>
+                                        <small class="text-muted">Forecast +2 Hours</small>
+                                    </div>
+                                    <iconify-icon icon="mdi-web-clock" class="text-info" width="28" height="28"></iconify-icon>
+                                </div>
+                                <div class="prediction-value mb-2">
+                                    <h2 class="mb-0" id="server-prediction">-</h2>
+                                    <small class="text-muted">ms</small>
+                                </div>
+                                <div class="prediction-range mb-3">
+                                    <small class="text-muted">Confidence Range: <strong id="server-range">-</strong></small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">Current: <strong id="server-current">25 ms</strong></small>
+                                    <span class="trend-badge" id="server-trend">
+                                        <iconify-icon icon="mdi:arrow-up" width="16" height="16"></iconify-icon>
+                                        +2 ms
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overall Safety Analysis -->
+                    <div class="mt-4 p-4 rounded-3" id="safety-analysis" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac;">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <div class="d-flex align-items-start">
+                                    <iconify-icon icon="mdi:shield-check" class="text-success me-3" width="40" height="40"></iconify-icon>
+                                    <div>
+                                        <h5 class="mb-2">Overall System Status - Next 2 Hours</h5>
+                                        <p class="mb-2" id="safety-message">
+                                            Berdasarkan analisis prediksi ARIMA, semua parameter berada dalam rentang aman untuk 2 jam kedepan. 
+                                            Sistem monitoring akan terus memantau perubahan real-time.
+                                        </p>
+                                        <div class="d-flex gap-2 flex-wrap">
+                                            <span class="badge bg-success" id="temp-safety">
+                                                <iconify-icon icon="mdi:thermometer-check" width="14" height="14"></iconify-icon>
+                                                Temperature: Safe
+                                            </span>
+                                            <span class="badge bg-success" id="humidity-safety">
+                                                <iconify-icon icon="mdi:water-check" width="14" height="14"></iconify-icon>
+                                                Humidity: Safe
+                                            </span>
+                                            <span class="badge bg-success" id="server-safety">
+                                                <iconify-icon icon="mdi:server-security" width="14" height="14"></iconify-icon>
+                                                Server: Optimal
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                                <div class="p-3 bg-white rounded-3 shadow-sm">
+                                    <h6 class="mb-2 text-muted">Overall Risk Level</h6>
+                                    <h2 class="mb-0" id="risk-level">
+                                        <span class="badge bg-success" style="font-size: 1.5rem;">LOW RISK</span>
+                                    </h2>
+                                    <small class="text-muted d-block mt-2">Confidence: <strong id="confidence-score">98.5%</strong></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model Info Footer -->
+                    <div class="mt-3 pt-3 border-top">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <small class="text-muted d-block">Model Accuracy</small>
+                                <strong class="text-success">96.8%</strong>
+                            </div>
+                            <div class="col-md-3">
+                                <small class="text-muted d-block">Training Data</small>
+                                <strong>24h Rolling</strong>
+                            </div>
+                            <div class="col-md-3">
+                                <small class="text-muted d-block">Update Interval</small>
+                                <strong>Every 5 min</strong>
+                            </div>
+                            <div class="col-md-3">
+                                <small class="text-muted d-block">Database Status</small>
+                                <strong class="text-success">
+                                    <iconify-icon icon="mdi:database-check" width="14" height="14"></iconify-icon>
+                                    Connected
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="container-fluid bg-white ">
+            <footer class="row align-items-center py-4">
+                <div class="col-md-6 ">
+                    <p class="m-0">© DashLite - Admin Dashboard </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="m-0" class="">HTML Website Template By : <a href="https://www.instagram.com/rois.anggr_/"
+                            class="text-decoration-underline" target="_blank">Rois Afif Anggoro</a></p>
+                </div>
+            </footer>
+        </footer>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/js/script.ts"></script>
+    <script type="module" src="./dashboard.ts"></script>
+    <script src="https://code.iconify.design/3/3.0.1/iconify.min.js"></script>
+
+    <!-- script cek kadar ph -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/php/ph-logs/index.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById("ph-value").innerText = "-";
+                        document.getElementById("ph-status").innerText = "Tidak tersedia";
+                    } else {
+                        document.getElementById("ph-value").innerText = data.value;
+                        const statusElement = document.getElementById("ph-status");
+                        statusElement.innerText = data.status === 1 ? 'Normal' : 'Tidak Normal';
+                        statusElement.className = data.status === 1
+                            ? "change text-success fs-4"
+                            : "change text-danger fs-4";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    document.getElementById("ph-value").innerText = "Error";
+                });
+        });
+    </script>
+    <!-- script cek kadar ph -->
+
+    <!-- script cek kelembapan tanaman -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/php/moisture-logs/index.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById("moisture-value").innerText = "-";
+                        document.getElementById("moisture-status").innerText = "Tidak tersedia";
+                    } else {
+                        document.getElementById("moisture-value").innerText = data.value;
+                        const statusElement = document.getElementById("moisture-status");
+                        statusElement.innerText = data.status === 1 ? 'Normal' : 'Kering';
+                        statusElement.className = data.status === 1
+                            ? "change text-success fs-4"
+                            : "change text-danger fs-4";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    document.getElementById("moisture-value").innerText = "Error";
+                });
+        });
+    </script>
+    <!-- script cek kelembapan tanaman -->
+
+    <!-- script pompa aktif berapa kali dalam sehari -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/php/water-pump-logs/index.php')
+                .then(response => {
+                    // Tampilkan response untuk debugging
+                    console.log("Response status:", response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Data received:", data);
+
+                    if (data.error) {
+                        document.getElementById("water-pump-value").innerText = "Err";
+                        console.error("Error:", data.error);
+                    } else {
+                        // Pastikan nilai adalah integer
+                        const total = parseInt(data.total);
+                        document.getElementById("water-pump-value").innerText = total;
+
+                        // Tampilkan status tambahan jika diperlukan
+                        const statusElement = document.getElementById("water-pump-status");
+                        if (statusElement) {
+                            if (total > 0) {
+                                statusElement.innerText = "Aktif";
+                                statusElement.className = "change text-success fs-4";
+                            } else {
+                                statusElement.innerText = "Tidak Aktif";
+                                statusElement.className = "change text-danger fs-4";
+                            }
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error("Fetch error:", error);
+                    document.getElementById("water-pump-value").innerText = "Error";
+                });
+        });
+    </script>
+    <!-- script pompa aktif berapa kali dalam sehari -->
+
+    <!-- script pompa pakan aktif berapa kali dalam sehari -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/php/feeder-pump-logs/index.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById("feeder-pump-value").innerText = "-";
+                    } else {
+                        document.getElementById("feeder-pump-value").innerText = data.total;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    document.getElementById("feeder-pump-value").innerText = "Error";
+                });
+        });
+    </script>
+    <!-- script pompa pakan aktif berapa kali dalam sehari -->
+    
+    <!-- Initialize 3 line charts with dummy 24-hour data -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Labels for 24 hours with 2-hour intervals (12 data points)
+            const timeLabels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
+
+            // Dummy data for Room Temperature (in Celsius)
+            const tempRoomData = [22.5, 21.8, 21.2, 22.0, 23.5, 25.2, 27.8, 28.5, 27.2, 25.5, 24.0, 23.2];
+            // Dummy data for Rack Temperature (in Celsius) - usually higher than room
+            const tempRackData = [24.2, 23.5, 23.0, 23.8, 25.3, 27.0, 29.5, 30.2, 29.0, 27.3, 25.8, 24.9];
+            
+            const tempRoomLow = Math.min(...tempRoomData);
+            const tempRoomHigh = Math.max(...tempRoomData);
+            const tempRackLow = Math.min(...tempRackData);
+            const tempRackHigh = Math.max(...tempRackData);
+            
+            document.getElementById('temp-low').innerHTML = `Room: <strong>${tempRoomLow.toFixed(1)}°C</strong> | Rack: <strong>${tempRackLow.toFixed(1)}°C</strong>`;
+            document.getElementById('temp-high').innerHTML = `Room: <strong>${tempRoomHigh.toFixed(1)}°C</strong> | Rack: <strong>${tempRackHigh.toFixed(1)}°C</strong>`;
+
+            // Dummy data for Room Humidity (in %)
+            const humidityRoomData = [65, 68, 70, 72, 70, 65, 58, 55, 60, 63, 66, 67];
+            // Dummy data for Rack Humidity (in %) - usually lower than room
+            const humidityRackData = [60, 63, 65, 68, 66, 61, 54, 51, 56, 59, 62, 63];
+            
+            const humidityRoomLow = Math.min(...humidityRoomData);
+            const humidityRoomHigh = Math.max(...humidityRoomData);
+            const humidityRackLow = Math.min(...humidityRackData);
+            const humidityRackHigh = Math.max(...humidityRackData);
+            
+            document.getElementById('humidity-low').innerHTML = `Room: <strong>${humidityRoomLow}%</strong> | Rack: <strong>${humidityRackLow}%</strong>`;
+            document.getElementById('humidity-high').innerHTML = `Room: <strong>${humidityRoomHigh}%</strong> | Rack: <strong>${humidityRackHigh}%</strong>`;
+
+            // Dummy data for Server Speed (in Min/day)
+            const serverData = [15, 18, 20, 22, 25, 28, 30, 32, 28, 24, 20, 17];
+            const serverLow = Math.min(...serverData);
+            const serverHigh = Math.max(...serverData);
+            document.getElementById('server-low').textContent = serverLow + ' ms';
+            document.getElementById('server-high').textContent = serverHigh + ' ms';
+
+            // Common chart options
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 10,
+                            font: {
+                                size: 11
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            };
+
+            // Temperature Chart with dual datasets
+            const tempCtx = document.getElementById('tempChart').getContext('2d');
+            new Chart(tempCtx, {
+                type: 'line',
+                data: {
+                    labels: timeLabels,
+                    datasets: [
+                        {
+                            label: 'Room Temperature',
+                            data: tempRoomData,
+                            borderColor: '#19c37d',
+                            backgroundColor: 'rgba(25, 195, 125, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            pointHoverRadius: 5
+                        },
+                        {
+                            label: 'Rack Temperature',
+                            data: tempRackData,
+                            borderColor: '#f97316',
+                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            pointHoverRadius: 5
+                        }
+                    ]
+                },
+                options: commonOptions
+            });
+
+            // Humidity Chart with dual datasets
+            const humidityCtx = document.getElementById('humidityChart').getContext('2d');
+            new Chart(humidityCtx, {
+                type: 'line',
+                data: {
+                    labels: timeLabels,
+                    datasets: [
+                        {
+                            label: 'Room Humidity',
+                            data: humidityRoomData,
+                            borderColor: '#f59e0b',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            pointHoverRadius: 5
+                        },
+                        {
+                            label: 'Rack Humidity',
+                            data: humidityRackData,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            pointHoverRadius: 5
+                        }
+                    ]
+                },
+                options: commonOptions
+            });
+
+            // Server Speed Chart
+            const serverCtx = document.getElementById('serverChart').getContext('2d');
+            new Chart(serverCtx, {
+                type: 'line',
+                data: {
+                    labels: timeLabels,
+                    datasets: [{
+                        label: 'Server Speed (ms)',
+                        data: serverData,
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
+                    }]
+                },
+                options: commonOptions
+            });
+        });
+    </script>
+    <!-- Initialize 3 line charts with dummy 24-hour data -->
+    
+    <!-- ARIMA Prediction Simulation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Simulate ARIMA prediction with realistic calculations
+            function generateARIMAPredictions() {
+                // Get current time for prediction timestamp
+                const now = new Date();
+                const predictionTime = now.toLocaleTimeString('id-ID', { 
+                    timeZone: 'Asia/Jakarta',
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+                document.getElementById('prediction-time').textContent = predictionTime;
+
+                // Simulate ARIMA predictions based on recent trend
+                // Temperature prediction (current trend: rising)
+                const currentTemp = 23.5;
+                const tempPrediction = currentTemp + (Math.random() * 2 - 0.5); // ±0.5 variation
+                const tempLower = (tempPrediction - 0.8).toFixed(1);
+                const tempUpper = (tempPrediction + 0.8).toFixed(1);
+                const tempChange = (tempPrediction - currentTemp).toFixed(1);
+                
+                document.getElementById('temp-prediction').textContent = tempPrediction.toFixed(1);
+                document.getElementById('temp-range').textContent = `${tempLower}°C - ${tempUpper}°C`;
+                document.getElementById('temp-current').textContent = currentTemp + '°C';
+                
+                const tempTrend = document.getElementById('temp-trend');
+                if (tempChange > 0) {
+                    tempTrend.innerHTML = `<iconify-icon icon="mdi:arrow-up" width="16" height="16"></iconify-icon> +${tempChange}°C`;
+                    tempTrend.className = 'trend-badge trend-up';
+                } else {
+                    tempTrend.innerHTML = `<iconify-icon icon="mdi:arrow-down" width="16" height="16"></iconify-icon> ${tempChange}°C`;
+                    tempTrend.className = 'trend-badge trend-down';
+                }
+
+                // Humidity prediction (current trend: decreasing)
+                const currentHumidity = 68;
+                const humidityPrediction = currentHumidity - (Math.random() * 4 + 1); // -1 to -5
+                const humidityLower = Math.floor(humidityPrediction - 2);
+                const humidityUpper = Math.floor(humidityPrediction + 2);
+                const humidityChange = Math.floor(humidityPrediction - currentHumidity);
+                
+                document.getElementById('humidity-prediction').textContent = Math.floor(humidityPrediction);
+                document.getElementById('humidity-range').textContent = `${humidityLower}% - ${humidityUpper}%`;
+                document.getElementById('humidity-current').textContent = currentHumidity + '%';
+                
+                const humidityTrend = document.getElementById('humidity-trend');
+                humidityTrend.innerHTML = `<iconify-icon icon="mdi:arrow-down" width="16" height="16"></iconify-icon> ${humidityChange}%`;
+                humidityTrend.className = 'trend-badge trend-down';
+
+                // Server Speed prediction (current trend: increasing slightly)
+                const currentServer = 25;
+                const serverPrediction = currentServer + (Math.random() * 3 + 1); // +1 to +4
+                const serverLower = Math.floor(serverPrediction - 1.5);
+                const serverUpper = Math.floor(serverPrediction + 1.5);
+                const serverChange = Math.floor(serverPrediction - currentServer);
+                
+                document.getElementById('server-prediction').textContent = Math.floor(serverPrediction);
+                document.getElementById('server-range').textContent = `${serverLower}ms - ${serverUpper}ms`;
+                document.getElementById('server-current').textContent = currentServer + ' ms';
+                
+                const serverTrend = document.getElementById('server-trend');
+                serverTrend.innerHTML = `<iconify-icon icon="mdi:arrow-up" width="16" height="16"></iconify-icon> +${serverChange} ms`;
+                serverTrend.className = 'trend-badge trend-up';
+
+                // Safety Analysis Logic
+                // Temperature: Safe range 20-30°C
+                const tempSafe = tempPrediction >= 20 && tempPrediction <= 30;
+                // Humidity: Safe range 40-80%
+                const humiditySafe = humidityPrediction >= 40 && humidityPrediction <= 80;
+                // Server: Safe range < 50ms
+                const serverSafe = serverPrediction < 50;
+
+                // Update individual safety badges
+                const tempSafetyBadge = document.getElementById('temp-safety');
+                if (tempSafe) {
+                    tempSafetyBadge.className = 'badge bg-success';
+                    tempSafetyBadge.innerHTML = '<iconify-icon icon="mdi:thermometer-check" width="14" height="14"></iconify-icon> Temperature: Safe';
+                } else {
+                    tempSafetyBadge.className = 'badge bg-warning';
+                    tempSafetyBadge.innerHTML = '<iconify-icon icon="mdi:thermometer-alert" width="14" height="14"></iconify-icon> Temperature: Warning';
+                }
+
+                const humiditySafetyBadge = document.getElementById('humidity-safety');
+                if (humiditySafe) {
+                    humiditySafetyBadge.className = 'badge bg-success';
+                    humiditySafetyBadge.innerHTML = '<iconify-icon icon="mdi:water-check" width="14" height="14"></iconify-icon> Humidity: Safe';
+                } else {
+                    humiditySafetyBadge.className = 'badge bg-warning';
+                    humiditySafetyBadge.innerHTML = '<iconify-icon icon="mdi:water-alert" width="14" height="14"></iconify-icon> Humidity: Warning';
+                }
+
+                const serverSafetyBadge = document.getElementById('server-safety');
+                if (serverSafe) {
+                    serverSafetyBadge.className = 'badge bg-success';
+                    serverSafetyBadge.innerHTML = '<iconify-icon icon="mdi:server-security" width="14" height="14"></iconify-icon> Server: Optimal';
+                } else {
+                    serverSafetyBadge.className = 'badge bg-warning';
+                    serverSafetyBadge.innerHTML = '<iconify-icon icon="mdi:server-alert" width="14" height="14"></iconify-icon> Server: High Load';
+                }
+
+                // Overall risk assessment
+                const safetyAnalysis = document.getElementById('safety-analysis');
+                const safetyMessage = document.getElementById('safety-message');
+                const riskLevel = document.getElementById('risk-level');
+                const confidenceScore = document.getElementById('confidence-score');
+
+                if (tempSafe && humiditySafe && serverSafe) {
+                    // All safe - LOW RISK
+                    safetyAnalysis.style.background = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
+                    safetyAnalysis.style.border = '1px solid #86efac';
+                    safetyMessage.textContent = 'Berdasarkan analisis prediksi ARIMA, semua parameter berada dalam rentang aman untuk 2 jam kedepan. Sistem monitoring akan terus memantau perubahan real-time.';
+                    riskLevel.innerHTML = '<span class="badge bg-success" style="font-size: 1.5rem;">LOW RISK</span>';
+                    confidenceScore.textContent = (96 + Math.random() * 3).toFixed(1) + '%';
+                } else if ((tempSafe ? 1 : 0) + (humiditySafe ? 1 : 0) + (serverSafe ? 1 : 0) >= 2) {
+                    // 2 out of 3 safe - MEDIUM RISK
+                    safetyAnalysis.style.background = 'linear-gradient(135deg, #fefce8 0%, #fef9c3 100%)';
+                    safetyAnalysis.style.border = '1px solid #fde047';
+                    safetyMessage.textContent = 'Terdapat indikasi satu parameter mendekati batas aman. Sistem merekomendasikan pemantauan lebih ketat dan persiapan tindakan preventif.';
+                    riskLevel.innerHTML = '<span class="badge bg-warning text-dark" style="font-size: 1.5rem;">MEDIUM RISK</span>';
+                    confidenceScore.textContent = (90 + Math.random() * 4).toFixed(1) + '%';
+                } else {
+                    // Multiple parameters unsafe - HIGH RISK
+                    safetyAnalysis.style.background = 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)';
+                    safetyAnalysis.style.border = '1px solid #fca5a5';
+                    safetyMessage.textContent = 'Prediksi menunjukkan beberapa parameter di luar rentang optimal. Segera lakukan inspeksi sistem dan tindakan korektif diperlukan.';
+                    riskLevel.innerHTML = '<span class="badge bg-danger" style="font-size: 1.5rem;">HIGH RISK</span>';
+                    confidenceScore.textContent = (85 + Math.random() * 5).toFixed(1) + '%';
+                }
+
+                // Add loading animation effect
+                document.querySelectorAll('.prediction-card').forEach(card => {
+                    card.style.animation = 'none';
+                    setTimeout(() => {
+                        card.style.animation = 'fadeInUp 0.5s ease-out';
+                    }, 10);
+                });
+            }
+
+            // Initial prediction
+            setTimeout(generateARIMAPredictions, 500);
+
+            // Update predictions every 5 minutes (simulate real-time ML processing)
+            setInterval(generateARIMAPredictions, 5 * 60 * 1000);
+
+            // Simulate database sync indicator
+            const mlStatus = document.getElementById('ml-status');
+            setInterval(() => {
+                mlStatus.style.opacity = '0.5';
+                setTimeout(() => {
+                    mlStatus.style.opacity = '1';
+                }, 200);
+            }, 5000);
+        });
+    </script>
+    <!-- ARIMA Prediction Simulation Script -->
+    
+    <!-- script jam  -->
+    <!-- Script: update digital (time-value) & analog (hour/minute/second) berdasarkan Asia/Jakarta -->
+    <script>
+        (function () {
+            const elTime = document.getElementById('time-value');
+            const elHour = document.getElementById('hour');
+            const elMinute = document.getElementById('minute');
+            const elSecond = document.getElementById('second');
+
+            function pad(n) { return String(n).padStart(2, '0'); }
+
+            function updateTime() {
+                const now = new Date();
+
+                // ambil parts waktu berdasarkan timezone Jakarta
+                const parts = new Intl.DateTimeFormat('id-ID', {
+                    timeZone: 'Asia/Jakarta',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    hour12: false
+                }).formatToParts(now);
+
+                const hours = parseInt(parts.find(p => p.type === 'hour').value, 10);
+                const minutes = parseInt(parts.find(p => p.type === 'minute').value, 10);
+                const seconds = parseInt(parts.find(p => p.type === 'second').value, 10);
+
+                // update digital display (contoh: 08:42:05 WIB)
+                if (elTime) {
+                    elTime.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+                }
+
+                // derajat untuk jarum
+                const secondDeg = seconds * 6; // 360/60
+                const minuteDeg = minutes * 6 + seconds * 0.1; // menit + progres detik
+                const hourDeg = (hours % 12) * 30 + minutes * 0.5 + seconds * (0.5 / 60); // jam + progres menit + detik
+
+                // set transform (translate sama seperti di CSS, lalu rotate)
+                if (elSecond) elSecond.style.transform = `translate(-50%,-100%) rotate(${secondDeg}deg)`;
+                if (elMinute) elMinute.style.transform = `translate(-50%,-100%) rotate(${minuteDeg}deg)`;
+                if (elHour) elHour.style.transform = `translate(-50%,-100%) rotate(${hourDeg}deg)`;
+            }
+
+            // update tiap 1 detik
+            setInterval(updateTime, 1000);
+            updateTime();
+        })();
+    </script>
+    <!-- Fallback: ensure sticky topbar works even inside overflow parents -->
+
+    <!-- Scoped styles untuk jam -->
+    <style>
+        /* wrapper di kanan */
+        .clock-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        /* tampilan lingkar jam */
+        .mini-clock {
+            width: 38px;
+            height: 38px;
+            border-radius: 70%;
+            background: #0f0f10;
+            /* warna dial */
+            position: relative;
+            box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.04) inset;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* jarum - pangkal jarum ada di tengah bawah elemen jarum (origin) */
+        .hand {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform-origin: 50% 100%;
+            /* pangkal jarum pada bottom */
+            transform: translate(-50%, -100%) rotate(0deg);
+            transition: transform 0.06s linear;
+            border-radius: 2px;
+            z-index: 3;
+        }
+
+        /* styling tiap jarum (sesuaikan panjang/tebal) */
+        .hand.hour {
+            width: 2px;
+            height: 35%;
+            background: #ffffff;
+        }
+
+        .hand.minute {
+            width: 2px;
+            height: 40%;
+            background: #19c37d;
+        }
+
+        .hand.second {
+            width: 1px;
+            height: 45%;
+            background: #e74c3c;
+        }
+
+        /* titik pusat */
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+        }
+
+        /* Ensure content isn't hidden under the sticky topbar. Adjust if your topbar height changes. */
+.content-with-sticky-top{
+    padding-top: 70px; /* reserve space equal to topbar height */
+}
+
+/* Fallback: if sticky-top doesn't work due to parent overflow, use fixed positioning */
+#topbar.fixed-fallback{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030; /* above default content */
+}
+
+/* Chart container styling */
+.chart-box {
+    padding: 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    height: 100%;
+}
+
+.chart-box h6 {
+    color: #374151;
+    font-weight: 600;
+}
+
+.chart-container canvas {
+    max-height: 250px;
+}
+
+@media (max-width: 991px) {
+    .chart-container canvas {
+        max-height: 200px;
+    }
+}
+
+/* ARIMA Prediction Section Styling */
+.prediction-card {
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.prediction-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.prediction-value h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #111827;
+    display: inline-block;
+}
+
+.prediction-range {
+    padding: 8px 12px;
+    background: #f9fafb;
+    border-radius: 6px;
+    border-left: 3px solid #6366f1;
+}
+
+.trend-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.trend-badge.trend-up {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.trend-badge.trend-down {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.prediction-card {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Safety Analysis Box */
+#safety-analysis {
+    transition: all 0.4s ease;
+}
+
+#risk-level .badge {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Model Status Indicator */
+#ml-status {
+    transition: opacity 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .prediction-value h2 {
+        font-size: 2rem;
+    }
+    
+    .prediction-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Alert Info Styling */
+.alert-info {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+    </style>
+
+
+
+
+</body>
+
+</html>

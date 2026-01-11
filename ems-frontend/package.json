@@ -1,0 +1,21 @@
+{
+  "name": "ems-frontend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "EMS Frontend with TypeScript and Vite",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "serve": "vite",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0"
+  }
+}
