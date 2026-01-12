@@ -1,4 +1,4 @@
-# 🌱 Environment Monitoring System (EMS)
+# 🌱 Environment Monitoring System (EMS) for local only
 
 ![EMS Banner](https://img.shields.io/badge/EMS-Environment%20Monitoring%20System-green?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -10,7 +10,7 @@ Sistem monitoring lingkungan berbasis IoT untuk memantau kondisi tanaman secara 
 ## 🚀 Fitur Utama
 
 - 📊 **Real-time Dashboard** - Monitoring sensor data secara langsung
-- 🌡️ **Multi Sensor Support** - pH, kelembaban, pompa air, feeder pump
+- 🌡️ **Multi Sensor Support** - suhu, kelembaban, flame
 - ⚡ **TypeScript Full Stack** - Backend dan Frontend menggunakan TypeScript
 - 🔔 **Smart Alerts** - Notifikasi otomatis untuk kondisi abnormal
 - 📱 **Responsive Design** - Akses dari desktop maupun mobile
